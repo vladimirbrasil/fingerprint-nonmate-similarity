@@ -33,10 +33,21 @@ torna o trabalho publicável.
 - `REPORT.md` (inglês) e rascunho de resposta ao Levin **no Gmail, na thread certa** (aguardando
   revisão e envio do Vladimir).
 
+## SourceAFIS (feito 23/09, commit 73b546b) — REPORT Results 4 e 5
+
+- `sourceafis/` (Maven local em `build/apache-maven-3.9.9`), 70 s; `scripts/31` (matriz bozorth3),
+  `scripts/32` (comparação) → `results/comparacao_matchers.json`.
+- Discordam por IMPRESSÃO (top-10 sem interseção, Spearman 0,28); concordam mais por DEDO (0,59).
+- Duplicatas conhecidas FVC2000 108 e 110 pontuam como impostores → escore não prova "diferente".
+- ⚠️ Par FVC2002 DB3/108 × FVC2004 DB3/102: ambos parecem verticilos; top-10 nos dois matchers.
+  A frase antiga "classe diferente, obviamente dedos diferentes" estava ERRADA e saiu do REPORT.
+  **Pendência 👤: Vladimir olhar como perito** (`results/par_108x102_dois_matchers.png` + imagens em
+  `data/fvc/`). Rascunho do Gmail ainda tem a frase errada.
+
 ## Próximos passos, na ordem
 
-1. **SourceAFIS como segundo matcher** (Java, `sourceafis-java`): rodar sobre os mesmos pares e
-   comparar as caudas. Se os dois algoritmos discordarem no extremo, escalar não adianta.
+1. ~~SourceAFIS~~ feito. Na SOCOFing, rodar os DOIS matchers e só levar a humano o candidato que
+   resistir nos dois e em várias impressões.
 2. **SOCOFing** (600 pessoas, 6.000 imagens, ~18M pares, ~3 h aqui). ⚠️ **Excluir as pastas
    `Altered-Easy/Medium/Hard`** — são cópias alteradas de propósito das mesmas digitais e
    contaminariam a pilha de "pessoas diferentes" em massa. Conferir contagem antes de rodar.
