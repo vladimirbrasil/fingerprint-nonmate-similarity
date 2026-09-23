@@ -1,0 +1,7 @@
+data/
+build/
+nbis-src/
+out/
+.handoff/
+*.min
+*.xyt

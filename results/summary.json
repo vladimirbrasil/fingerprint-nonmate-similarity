@@ -1,0 +1,32 @@
+{
+  "num_images": 960,
+  "num_fingers": 120,
+  "num_genuine_pairs": 3360,
+  "num_impostor_pairs": 456960,
+  "num_total_pairs": 460320,
+  "elapsed_time_seconds": 158.24,
+  "impostor_score_max": 200,
+  "impostor_score_percentiles": {
+    "p50": 6,
+    "p75": 8,
+    "p90": 10,
+    "p95": 12,
+    "p99": 17,
+    "p99.9": 30,
+    "p99.99": 141
+  },
+  "impostors_ge_40": 357,
+  "impostors_ge_100": 129,
+  "genuine_score_max": 366,
+  "genuine_score_percentiles": {
+    "p50": 58,
+    "p75": 101,
+    "p90": 150,
+    "p95": 176,
+    "p99": 229,
+    "p99.9": 292,
+    "p99.99": 366
+  },
+  "genuine_ge_40": 2193,
+  "genuine_ge_100": 872
+}
