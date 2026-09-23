@@ -48,6 +48,17 @@ torna o trabalho publicável.
   **Pendência 👤 anterior: Vladimir olhar como perito** (`results/par_108x102_dois_matchers.png` + imagens em
   `data/fvc/`). Rascunho do Gmail ainda tem a frase errada.
 
+## SOCOFing (rodada completa 23/09, REPORT Result 6)
+
+- `scripts/40` (preparo, via delegate), `41` (NBIS sonda×galeria), `42` (análise); SourceAFIS modo genérico
+  `AllVsAll <galeria.csv> <sonda.csv|-> <saida.f32> <dpi> [limite]`. Matrizes em `out/socofing/completo/`.
+- Resolução real ~160 dpi (ampliado 3x). NBIS inútil sozinho aqui (13.499 ≥40 vs 30 do SA).
+- 11 grupos de imagens byte-idênticas com rótulos diferentes; 596/598 = mesma pessoa?
+- **Pendência 👤: revisar a fila `http://127.0.0.1:8765/socofing.html`** (41 pares ≥40 nos dois;
+  CSV `out/socofing/completo/fila_ambos.csv`). Depois: excluir duplicatas confirmadas e refazer a
+  curva de crescimento do máximo e o "mesmo corpo × corpos diferentes" (a curva atual é lixo: dominada por cópias).
+- Servidor da página: `python3 -m http.server 8765 --bind 127.0.0.1 -d out/comparar`.
+
 ## Próximos passos, na ordem
 
 1. ~~SourceAFIS~~ feito. Na SOCOFing, rodar os DOIS matchers e só levar a humano o candidato que

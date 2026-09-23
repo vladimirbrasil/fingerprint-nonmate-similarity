@@ -122,11 +122,40 @@ people, scored like strangers by both algorithms.
 Figure: `results/par_108x102_dois_matchers.png` shows the peak pair of each algorithm for this finger
 pair. The full numbers are in `results/comparacao_matchers.json`.
 
+## Result 6 — SOCOFing, 18 million pairs (preliminary)
+
+SOCOFing (Shehu et al., 2018; 600 subjects, 10 fingers each, one impression per finger) was run
+all-against-all with both matchers: 17,997,000 pairs. Measured ridge period puts the images' real
+resolution near 160 dpi rather than 500; they were upsampled 3x before matching. A sanity test
+(each "Altered-Easy / central rotation" image searched against 600 real fingers) found the right finger
+first 99.8% of the time with `bozorth3` and 99.7% with SourceAFIS. The altered images take no part in
+the statistics.
+
+**The extreme tail is, again, records rather than fingers.** The dataset contains 11 groups of
+byte-identical images filed under different labels (26 files; e.g. one image filed as the left little
+finger of five different subjects), and subjects 596 and 598 behave like one person (or one person
+with shuffled labels). After removing byte-identical copies, 41 pairs still score ≥ 40 in *both*
+matchers. Each needs an examiner: 29 involve 596/598, and 12 are two differently-named fingers of the
+same subject. The first of them, examined visually, is the same capture filed as two fingers. Until
+that review is done, no maximum from this dataset is reported. The raw maximum (SourceAFIS 1,178)
+is a duplicated file.
+
+**`bozorth3` is not usable alone on these images.** It puts 13,499 different-finger pairs at ≥ 40
+against SourceAFIS's 30: upsampled low-resolution images give spurious minutiae, and `bozorth3` counts them.
+
+**Same body vs. different bodies (first look).** Different fingers of the same person score slightly
+higher than fingers of different people across the upper distribution (99th percentile: 30 vs 23 in
+`bozorth3`, 13.9 vs 11.6 in SourceAFIS; medians essentially equal). A finger and its mirror-twin on the
+other hand (e.g. left vs right index) show no extra similarity at the 99th percentile. This is
+consistent with the known correlation of pattern class within a person. It is preliminary, because
+mislabelled duplicates within subjects inflate exactly this group's extreme tail.
+
+Numbers: `results/socofing_analise.json`; byte-identical groups: `results/socofing_duplicatas_exatas.json`.
+
 ## Limits (stated plainly)
 
-- 120 fingers is a small population. The tail of this distribution is what matters, and a small
-  sample under-samples tails. The next step is SOCOFing (600 subjects, 6,000 images, ~18M pairs;
-  about 3 hours on this machine) and, with a data request, the NIST SD300–303 series.
+- 120 fingers in FVC, 6,000 in SOCOFing (Result 6). Both are small next to national databases, and
+  SOCOFing's images are low-resolution. The NIST SD300–303 series (by data request) is the next step.
 - Two matchers now (Result 4). Both are open-source, not a commercial AFIS. Commercial matchers
   are stronger, and their tails may differ again.
 - These are flat, good-quality impressions. Real forensic errors (Mayfield 2004, McKie 1997) happen
