@@ -25,13 +25,13 @@ public-domain software, on an ordinary desktop machine. No law-enforcement syste
 | 90 | 150 | 10 |
 | 99 | 229 | 17 |
 | 99.9 | 292 | 30 |
-| max | 366 | 59 (corrected — see below) |
+| max | 366 | 39 (after removing the duplicates of Results 2 and 3) |
 
 Half of all different-finger pairs score 6 or less on a scale where same-finger pairs sit around 58.
-At the operational threshold of 40 often used with `bozorth3`, **2 different-finger pairs out of
-414,720 cross the line (0.0005%)**, once the 42,240 same-index cross-database pairs are set aside
-(Result 2 explains why), and the highest of them reaches 59 — a score that a same-finger
-pair beats half the time.
+At the operational threshold of 40 often used with `bozorth3`, 2 different-finger pairs out of
+414,720 cross the line, once the 42,240 same-index cross-database pairs are set aside (Result 2
+explains why). **Both turned out to be the same finger** (Result 3). With that duplicate removed,
+**no pair of genuinely different fingers reaches 40**: the highest of 414,656 scores 39.
 
 ## Result 2 — the interesting part: the "matches" that weren't
 
@@ -52,13 +52,26 @@ with the same fingerprint" was a **record duplication**. In a national database,
 a hit against a person who is supposed to be dead would look like first — and exactly what would be
 closed as a clerical error, correctly in almost every case, without anyone recording it.
 
-## Result 3 — the closest non-mate pair, and why a score cannot settle it
+## Result 3 — the closest "different" pair was the same finger
 
-`results/par_mais_proximo.png` shows the pair that scored 59 with `bozorth3`: FVC2002 DB3 finger 108,
-impression 7, and FVC2004 DB3 finger 102, impression 1. An earlier draft of this report called them
-different pattern classes. **That was wrong**: on inspection both look like whorls. We make no claim
-either way about whether they come from the same finger. That judgement belongs to a trained examiner
-(ACE-V), and Result 5 shows why the scores cannot make it.
+The pair that scored 59 with `bozorth3` joins FVC2002 DB3 finger 108 and FVC2004 DB3 finger 102,
+two collections made two years apart on different sensors (capacitive in 2002, thermal sweep in
+2004). SourceAFIS independently ranks the same finger pair first among 6,480 (Result 4).
+
+**It is one finger.** A fingerprint examiner (the author, twenty years in forensic identification)
+compared all 64 impression pairs and found at least 12 corresponding minutiae in every one. The same
+dermal scars appear in both collections, and where pores are visible they sit in corresponding
+positions. The volunteer was enrolled in both collections under different labels, and nothing in the
+data links the two. An earlier draft of this report called the pair "different pattern classes";
+that was wrong, and it was written before anyone had looked properly. Blind verification by a second
+examiner has not yet been done.
+
+The matchers mostly missed it. Of the 64 comparisons, 62 score below 40 in `bozorth3` (median 14)
+and 60 in SourceAFIS (median 12.8). The small, partly overlapping capture areas of the two sensors
+are the likely reason.
+
+Figure: `results/par_108x102_dois_matchers.png`. The point-by-point figure will be added with the
+examiner's marked correspondences.
 
 ## Result 4 — a second, unrelated matcher (SourceAFIS)
 
@@ -103,8 +116,8 @@ The error therefore runs both ways. A duplicated record can look like a coincide
 can also look like two different people (this result). For the original question this is the harder
 half: a real "same pattern in another body" would first have to be told apart from a record that
 nobody linked, captured on another device, years apart. The FVC2002 DB3 × FVC2004 DB3 pair above is
-exactly this situation: two Bologna collections, two sensors, two years apart. It stays **open**
-until an examiner looks at it.
+exactly this situation, and Result 3 shows how it resolved: the same finger, labelled as two
+people, scored like strangers by both algorithms.
 
 Figure: `results/par_108x102_dois_matchers.png` shows the peak pair of each algorithm for this finger
 pair. The full numbers are in `results/comparacao_matchers.json`.
