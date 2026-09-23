@@ -66,3 +66,26 @@ torna o trabalho publicável.
 - **Não redistribuir as bases:** `data/` está no `.gitignore`; só resultados agregados e uma figura
   com citação de origem.
 - Escore alto **não** é identificação; a decisão é humana (ACE-V). Isso precisa estar em todo texto.
+
+## 2026-09-23 (tarde) — NOVA DIREÇÃO, vinda do Vladimir
+
+Ao revisar a carta, o Vladimir levantou a hipótese que muda o experimento: e se a "aleatoriedade"
+das semanas 10–16 **não for ruído**, e sim a saída de um sistema não-genético com padrão-alvo —
+o mesmo tipo de sistema que, no lab do Levin, decide se a planária regenera uma ou duas cabeças?
+
+**Experimento novo (melhor que a cauda de colisão), e roda no mesmo dado:**
+- Os **10 dedos da mesma pessoa** se parecem mais entre si do que com dedos de estranhos?
+- O **indicador esquerdo** se parece mais com o **indicador direito** do que com os outros dedos
+  da mesma pessoa (simetria espelhada)?
+- Ruído puro prevê ausência de estrutura; sistema com padrão-alvo prevê simetria e "ar de família".
+
+A SOCOFing é o corpus certo: 600 pessoas × 10 dedos, com **mão e nome do dedo no nome do arquivo**
+(`1__M_Left_index_finger.BMP`). Ao baixar, preservar esses rótulos — eles são o experimento, não
+metadado descartável. Continuar excluindo `Altered-*`.
+
+Cuidado estatístico: comparar dedos de nomes diferentes mistura classes de padrão (verticilo, presilha,
+arco), que já têm frequências distintas na população. O controle correto compara **mesmo nome de dedo
+entre pessoas diferentes** contra **mesmo nome de dedo, mãos opostas, mesma pessoa**.
+
+Carta ao Levin reescrita com isso + exemplo das planárias; a frase errada sobre "classe diferente"
+saiu. Rascunho no Gmail (thread certa), aguardando envio do Vladimir.
