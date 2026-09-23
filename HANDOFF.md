@@ -41,7 +41,11 @@ torna o trabalho publicável.
 - Duplicatas conhecidas FVC2000 108 e 110 pontuam como impostores → escore não prova "diferente".
 - ⚠️ Par FVC2002 DB3/108 × FVC2004 DB3/102: ambos parecem verticilos; top-10 nos dois matchers.
   A frase antiga "classe diferente, obviamente dedos diferentes" estava ERRADA e saiu do REPORT.
-  **Pendência 👤: Vladimir olhar como perito** (`results/par_108x102_dois_matchers.png` + imagens em
+  **23/09: exame inicial do Vladimir = PROVÁVEL MESMO DEDO (preliminar)** → duplicata entre coletas
+  2002×2004 que os dois matchers deixaram passar (medianas 14/12,8). Falta: marcar pontos na página
+  (`scripts/comparar.py`, tecla M, exportar → `--figura`), verificação cega por outro perito, e revisar
+  a fila `--fila 15` (28 candidatos; vários FVC2002 DB1×DB2 — possível voluntário repetido).
+  **Pendência 👤 anterior: Vladimir olhar como perito** (`results/par_108x102_dois_matchers.png` + imagens em
   `data/fvc/`). Rascunho do Gmail ainda tem a frase errada.
 
 ## Próximos passos, na ordem
