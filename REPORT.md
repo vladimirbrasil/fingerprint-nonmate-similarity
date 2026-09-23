@@ -58,7 +58,7 @@ The pair that scored 59 with `bozorth3` joins FVC2002 DB3 finger 108 and FVC2004
 two collections made two years apart on different sensors (capacitive in 2002, thermal sweep in
 2004). SourceAFIS independently ranks the same finger pair first among 6,480 (Result 4).
 
-**It is one finger.** A fingerprint examiner (the author, twenty years in forensic identification)
+**It is one finger.** A fingerprint examiner (the author)
 compared all 64 impression pairs and found at least 12 corresponding minutiae in every one. The same
 dermal scars appear in both collections, and where pores are visible they sit in corresponding
 positions. The volunteer was enrolled in both collections under different labels, and nothing in the
