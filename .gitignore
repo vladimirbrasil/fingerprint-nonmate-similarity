@@ -5,3 +5,4 @@ out/
 .handoff/
 *.min
 *.xyt
+sourceafis/target/
