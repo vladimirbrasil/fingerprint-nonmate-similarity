@@ -204,6 +204,21 @@ def extrair_para_dedo(task):
     flag_falha_c = 1
     c_erro = "pcasys_imagem_pequena_w288_lt_512"
 
+    # --- Qualidade da Imagem (Desvio D4a) ---
+    if n_valid > 0:
+        qual_med = float(np.mean(qm[valid_blocks]))
+        try:
+            from PIL import Image
+            img = np.array(Image.open(jpg_path).convert("L"))
+            mask = np.repeat(np.repeat(valid_blocks, 8, axis=0), 8, axis=1)[:img.shape[0], :img.shape[1]]
+            valid_px = img[mask]
+            contraste = float(np.std(valid_px)) if len(valid_px) > 0 else 0.0
+        except Exception:
+            contraste = 0.0
+    else:
+        qual_med = 0.0
+        contraste = 0.0
+
     return {
         "pessoa": task["pessoa"],
         "sexo": task["sexo"],
@@ -223,7 +238,10 @@ def extrair_para_dedo(task):
         "flag_falha_o": flag_falha_o,
         "flag_falha_q": flag_falha_q,
         "flag_falha_c": flag_falha_c,
-        "c_erro": c_erro
+        "c_erro": c_erro,
+        "qualidade_media": f"{qual_med:.6f}",
+        "area_util": n_valid,
+        "contraste": f"{contraste:.6f}"
     }
 
 
@@ -284,7 +302,8 @@ def main():
         "o_entropia", "o_frac_alta_curvatura", "o_orientacao_dominante", "o_coerencia",
         "q_n_minucias", "q_area_util", "q_densidade", "q_n_minucias_total",
         "c_classe", "c_confianca",
-        "flag_falha_o", "flag_falha_q", "flag_falha_c", "c_erro"
+        "flag_falha_o", "flag_falha_q", "flag_falha_c", "c_erro",
+        "qualidade_media", "area_util", "contraste"
     ]
 
     with open(FEATURES_CSV, "w", newline="", encoding="utf-8") as f:

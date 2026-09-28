@@ -67,13 +67,13 @@ def main():
     parser.add_argument("--n-jobs", type=int, default=3, help="Número de processos paralelos (padrão: 3)")
     args = parser.parse_args()
 
-    dados = cega.carregar_dados(FEATURES_CSV, DUPLICATAS_JSON)
-    mat_O_raw = dados["O_entropia"]
-    mat_Q_raw = dados["Q_densidade"]
+    dados = cega.carregar_dados()
+    mat_O_ajustada = dados["O_entropia_ajustada"]
+    mat_Q_ajustada = dados["Q_densidade_ajustada"]
     N_pessoas = dados["N"]
 
     print("==================================================================")
-    print("CALIBRAÇÃO ESTATÍSTICA SOB O NULO — ESTUDO 02 (Desvio D3)")
+    print("CALIBRAÇÃO ESTATÍSTICA SOB O NULO — ESTUDO 02 (Desvios D3, D4b, D5)")
     print("==================================================================")
     print(f"Sujeitos completos analisados: {N_pessoas}")
     print(f"Conjuntos independentes embaralhados: {args.n_conjuntos}")
@@ -89,7 +89,7 @@ def main():
     print("[INFO] Executando calibração em paralelo...")
     resultados = Parallel(n_jobs=args.n_jobs, verbose=5)(
         delayed(avaliar_um_conjunto)(
-            i, sementes[i], mat_O_raw, mat_Q_raw, args.n_nulo
+            i, sementes[i], mat_O_ajustada, mat_Q_ajustada, args.n_nulo
         ) for i in range(args.n_conjuntos)
     )
 
@@ -107,11 +107,11 @@ def main():
     frac_max = float(high_k / args.n_conjuntos)
 
     hipoteses_dict = {
-        "H1_familia_O": ("H1: Família O (Entropia Orientação)", p_h1_O),
-        "H1_familia_Q": ("H1: Família Q (Densidade Minúcias)", p_h1_Q),
-        "H2_familia_O": ("H2: Família O (MI Homólogos > Não-Homólogos)", p_h2_O),
-        "H2_familia_Q": ("H2: Família Q (MI Homólogos > Não-Homólogos)", p_h2_Q),
-        "H3_concordancia": ("H3: Concordância Inter-Família (O x Q)", p_h3),
+        "H1_familia_O": ("H1: Família O (Entropia Orientação Ajustada)", p_h1_O),
+        "H1_familia_Q": ("H1: Família Q (Densidade Minúcias Ajustada)", p_h1_Q),
+        "H2_familia_O": ("H2: Família O (MI Homólogos > Não-Homólogos Ajustada)", p_h2_O),
+        "H2_familia_Q": ("H2: Família Q (MI Homólogos > Não-Homólogos Ajustada)", p_h2_Q),
+        "H3_concordancia": ("H3: Concordância Inter-Família (O x Q Ajustadas)", p_h3),
     }
 
     analise_hipoteses = {}
