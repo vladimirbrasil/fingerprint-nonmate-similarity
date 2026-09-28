@@ -6,7 +6,7 @@
 # Funcionalidades:
 # - Sorteia 100 dedos de SOCOFing Real com semente fixa (seed=42).
 # - Gera página HTML estática e auto-contida em out/estudo02/validacao/index.html.
-# - Botões para as 5 classes: Arco, Presilha esquerda, Presilha direita, Verticilo, Não sei.
+# - Botões para as 5 classes: Arco, Presilha interna (I), Presilha externa (E) — convenção Vucetich, pelo observador, Verticilo, Não sei.
 # - Atalhos de teclado ergonômicos (1..5, A/E/D/V/N, setas de navegação).
 # - Persistência automática em localStorage (não perde o progresso ao fechar o navegador).
 # - Exportação instantânea de CSV com download direto no navegador.
@@ -405,7 +405,7 @@ def gerar_html(amostra, output_html):
     <script>
         const amostra = {amostra_json_str};
         let currentIndex = 0;
-        const STORAGE_KEY = "socofing_validacao_100_v1";
+        const STORAGE_KEY = "socofing_validacao_100_v2_vucetich";
 
         // Carregar estado salvo do localStorage
         function getRespostas() {{
@@ -494,10 +494,10 @@ def gerar_html(amostra, output_html):
 
         function exportarCSV() {{
             const respostas = getRespostas();
-            let csv = "id_amostra,sujeito,sexo,mao,dedo,arquivo,classe_manual,timestamp\\n";
+            let csv = "arquivo,classe_vladimir\\n";
             amostra.forEach(item => {{
                 const r = respostas[item.id_amostra] || {{ classe: "Nao_classificado", timestamp: "" }};
-                csv += `${{item.id_amostra}},${{item.sujeito}},${{item.sexo}},${{item.mao}},${{item.dedo}},${{item.arquivo}},${{r.classe}},${{r.timestamp}}\\n`;
+                csv += `${{item.arquivo}},${{r.classe}}\\n`;
             }});
 
             const blob = new Blob([csv], {{ type: "text/csv;charset=utf-8;" }});
