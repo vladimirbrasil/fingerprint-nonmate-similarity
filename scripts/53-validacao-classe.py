@@ -355,13 +355,13 @@ def gerar_html(amostra, output_html):
                         Arco
                         <span class="shortcut">[1] ou [A]</span>
                     </button>
-                    <button class="btn-class btn-lloop" onclick="classificar('Presilha_esquerda')">
-                        Presilha Esquerda
-                        <span class="shortcut">[2] ou [E]</span>
+                    <button class="btn-class btn-lloop" onclick="classificar('Presilha_interna')">
+                        Presilha Interna (I) — delta à direita do observador
+                        <span class="shortcut">[2] ou [I]</span>
                     </button>
-                    <button class="btn-class btn-rloop" onclick="classificar('Presilha_direita')">
-                        Presilha Direita
-                        <span class="shortcut">[3] ou [D]</span>
+                    <button class="btn-class btn-rloop" onclick="classificar('Presilha_externa')">
+                        Presilha Externa (E) — delta à esquerda do observador
+                        <span class="shortcut">[3] ou [E]</span>
                     </button>
                     <button class="btn-class btn-whorl" onclick="classificar('Verticilo')">
                         Verticilo
@@ -391,8 +391,8 @@ def gerar_html(amostra, output_html):
             <div class="shortcuts-help">
                 <strong>Atalhos de Teclado:</strong><br>
                 • <code>1</code> ou <code>A</code>: Arco<br>
-                • <code>2</code> ou <code>E</code>: Presilha Esq.<br>
-                • <code>3</code> ou <code>D</code>: Presilha Dir.<br>
+                • <code>2</code> ou <code>I</code>: Presilha interna<br>
+                • <code>3</code> ou <code>E</code>: Presilha externa<br>
                 • <code>4</code> ou <code>V</code>: Verticilo<br>
                 • <code>5</code> ou <code>N</code>: Não sei<br>
                 • <code>←</code> / <code>→</code>: Navegação
@@ -405,7 +405,7 @@ def gerar_html(amostra, output_html):
     <script>
         const amostra = {amostra_json_str};
         let currentIndex = 0;
-        const STORAGE_KEY = "socofing_validacao_100_v2_vucetich";
+        const STORAGE_KEY = "socofing_validacao_100_v3_vucetich";
 
         // Carregar estado salvo do localStorage
         function getRespostas() {{
@@ -511,8 +511,8 @@ def gerar_html(amostra, output_html):
         window.addEventListener("keydown", (e) => {{
             const key = e.key.toUpperCase();
             if (key === "1" || key === "A") classificar("Arco");
-            else if (key === "2" || key === "E") classificar("Presilha_esquerda");
-            else if (key === "3" || key === "D") classificar("Presilha_direita");
+            else if (key === "2" || key === "I") classificar("Presilha_interna");
+            else if (key === "3" || key === "E") classificar("Presilha_externa");
             else if (key === "4" || key === "V") classificar("Verticilo");
             else if (key === "5" || key === "N") classificar("Nao_sei");
             else if (e.key === "ArrowLeft") navegar(-1);
