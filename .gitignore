@@ -6,3 +6,5 @@ out/
 *.min
 *.xyt
 sourceafis/target/
+__pycache__/
+*.pyc
