@@ -10,7 +10,7 @@
 #   scripts/comparar.py --fila 15            # candidatos: top-15 pares de dedos reais de cada matcher
 #   scripts/comparar.py --figura pontos.json # figura com os pontos marcados (exportados da página)
 # Marcação: M liga; ponto N nos dois lados (qualquer ordem) antes do N+1; Z desfaz; Salvar com 12 pares.
-# Saída: out/comparar/index.html — sirva com: python3 -m http.server -d out/comparar 8765
+# Saída: out/comparar/index.html — sirva com: scripts/servidor_revisao.py (grava vereditos 1/2/3 em vereditos.jsonl)
 import os, sys, csv, glob, json, html
 import numpy as np
 import cv2
@@ -180,8 +180,8 @@ button{background:#333;color:var(--fg);border:0;padding:6px 12px;border-radius:4
   contraste <input type=range min=50 max=300 value=100 data-k=c> brilho <input type=range min=50 max=200 value=100 data-k=b>
   girar <input type=range min=-45 max=45 value=0 data-k=r> <label><input type=checkbox data-k=i> inverter</label></div></div>
 </div>
-<div id=barra><button id=ant>← anterior</button><button id=prox>próximo →</button><span id=pos></span><span id=rot></span><button id=salvar disabled>Salvar</button>
-<span style="margin-left:auto;color:var(--dim)">M = marcar pontos (12 pares) · Z = desfazer · roda = zoom · arrastar = mover · duplo clique = reset</span></div>
+<div id=barra><button id=ant>← anterior</button><button id=prox>próximo →</button><span id=pos></span><span id=rot></span><span id=ver style="font-weight:bold"></span><button id=salvar disabled>Salvar</button>
+<span style="margin-left:auto;color:var(--dim)">1/2/3 = veredito · M = marcar pontos (12 pares) · Z = desfazer · roda = zoom · arrastar = mover · duplo clique = reset</span></div>
 <script>
 const P=__DADOS__;let k=0;
 const st={L:{c:100,b:100,r:0,i:false,z:1,x:0,y:0},R:{c:100,b:100,r:0,i:false,z:1,x:0,y:0}};
@@ -235,6 +235,17 @@ addEventListener('keydown',e=>{if(e.key=='m'||e.key=='M'){marcar=!marcar;hist=[]
  if((e.key=='z'||e.key=='Z')&&marcar&&hist.length){guarda(hist.pop());desenha()}
  if(marcar)return; // marcando: nada de trocar de par por acidente
  if(e.key=='ArrowRight'||e.key=='d')vai(1);if(e.key=='ArrowLeft'||e.key=='a')vai(-1)});
+const VK='veredito:',VER={'1':'MESMO DEDO','2':'DIFERENTES','3':'INCONCLUSIVO'};
+const lev=p=>{try{return localStorage.getItem(VK+p.na+'|'+p.nb)}catch(e){return null}};
+function mostraVer(){const v=lev(P[k]),n=P.filter(lev).length,el=document.getElementById('ver');
+ el.textContent=(v?'veredito: '+VER[v]:'sem veredito — 1 mesmo dedo · 2 diferentes · 3 inconclusivo')+` · ${n}/${P.length} feitos`;
+ el.style.color=v?'#6c6':'#fb5'}
+const _mostra=mostra;mostra=function(){_mostra();mostraVer()};
+addEventListener('keydown',e=>{if(marcar||!VER[e.key])return;const p=P[k];
+ try{localStorage.setItem(VK+p.na+'|'+p.nb,e.key)}catch(x){}
+ fetch('/veredito',{method:'POST',body:JSON.stringify({na:p.na,nb:p.nb,rot:p.rot,veredito:VER[e.key]})})
+  .then(r=>{if(!r.ok)throw 0}).catch(()=>{document.getElementById('status').innerHTML='<b style=color:#f55>veredito NÃO gravou no disco — use scripts/servidor_revisao.py</b>'});
+ mostraVer();setTimeout(()=>vai(1),350)});
 mostra();
 </script></html>"""
 
